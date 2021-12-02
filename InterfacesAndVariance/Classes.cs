@@ -2,7 +2,10 @@ using System.Collections.Generic;
 
 namespace GitGoodScrub
 {   
-    public class Present : IPresent{}
+    public class Present : IPresent
+    {
+        public string Name { get; set; }
+    }
     public class Toy : Present {}
 
     public class BagOfPresents : IBag<Present>

@@ -14,6 +14,6 @@ namespace GitGoodScrub
 
     public interface IBag<T> : IBagRead<T>, IBagWrite<T> where T : IPresent
     {
-        
+
     }
 }

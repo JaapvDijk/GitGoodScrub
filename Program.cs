@@ -6,7 +6,7 @@
         {
             Sample.InterfacesAndVariance();
             Sample.ExtensionMethods();
-            Sample.Continuation();
+            Sample.AsyncTesting();
         }
     }
 }

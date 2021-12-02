@@ -1,6 +1,9 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Linq;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace GitGoodScrub
 {
@@ -34,33 +37,55 @@ namespace GitGoodScrub
             toy.Display();
         }
 
-        public static void Continuation()
+        public static void AsyncTesting()
         {
             Console.WriteLine($"Getting messages async...");
             
             var msg1 = Async.GetMessageAsyncChain();
-
             Console.WriteLine($"Message: {msg1}");
 
             Console.WriteLine($"Getting more...");
 
-            //cToken here since class is static//
-            bool cancellationTokenSourceExists = false;
-            CancellationTokenSource cTokenSource = new();
 
-            if (cancellationTokenSourceExists) 
-            {   
-                cTokenSource.Cancel();
-                cTokenSource = null;
+            CancellationTokenSource cTokenSource;
+
+            // if (cancellationTokenSourceExists) 
+            // {   
+            //     cTokenSource.Cancel();
+            //     cTokenSource = null;
                 
-                return;
-            }
-
+            //     return;
+            // }
+            
             cTokenSource = new();
 
             var msg2 = Async.GetMessageAsyncAwaitCancellable(cTokenSource.Token).Result;
-
             Console.WriteLine($"Messages: {msg2}");
+
+            Stream().GetAwaiter().GetResult();
+        }
+
+        public static async Task Stream()
+        {
+            var toysOb = new ObservableCollection<Toy>();
+            toysOb.CollectionChanged += printenDieHandel;
+
+            var toys = Async.AsyncEnumerableToyStream();
+
+            await foreach (var toy in toys
+                .WithCancellation(CancellationToken.None))
+            {
+                toysOb.Add(toy);
+            }
+        }
+
+        public static void printenDieHandel(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            foreach (Object obj in e.NewItems)
+            {   
+                Toy toy = (Toy)obj;
+                Console.WriteLine($"Loaded: {toy.Name}");
+            }
         }
     }
 }

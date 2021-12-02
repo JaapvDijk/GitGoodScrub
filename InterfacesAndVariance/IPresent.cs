@@ -1,7 +1,7 @@
 namespace GitGoodScrub
 {
-    public class IPresent
+    public interface IPresent
     {
-        public string Name { get; set; }
+        string Name { get; set; }
     }
 }
