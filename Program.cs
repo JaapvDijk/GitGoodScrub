@@ -7,6 +7,8 @@
             Sample.InterfacesAndVariance();
             Sample.ExtensionMethods();
             Sample.AsyncTesting();
+            Sample.Delegate();
+            Sample.FluentValidation();
         }
     }
 }

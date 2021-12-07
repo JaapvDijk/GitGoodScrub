@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace GitGoodScrub
@@ -5,6 +6,7 @@ namespace GitGoodScrub
     public class Present : IPresent
     {
         public string Name { get; set; }
+        public DateTime GiftedOn { get; set; }
     }
     public class Toy : Present {}
 

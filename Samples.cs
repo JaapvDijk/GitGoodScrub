@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using FluentValidation.Results;
 
 namespace GitGoodScrub
 {
@@ -68,7 +69,7 @@ namespace GitGoodScrub
         public static async Task Stream()
         {
             var toysOb = new ObservableCollection<Toy>();
-            toysOb.CollectionChanged += printenDieHandel;
+            toysOb.CollectionChanged += printItAll;
 
             var toys = Async.AsyncEnumerableToyStream();
 
@@ -79,7 +80,7 @@ namespace GitGoodScrub
             }
         }
 
-        public static void printenDieHandel(object sender, NotifyCollectionChangedEventArgs e)
+        public static void printItAll(object sender, NotifyCollectionChangedEventArgs e)
         {
             foreach (Object obj in e.NewItems)
             {   
@@ -87,5 +88,27 @@ namespace GitGoodScrub
                 Console.WriteLine($"Loaded: {toy.Name}");
             }
         }
+
+        public static void Delegate()
+        {
+            CustomFunc<int, string> toString = (number) => number.ToString();
+            //CustomFunc is not invariant. What is the 'in' and 'out' for?
+            Object a = toString(1);
+            Console.WriteLine($"Custom func number to print: {toString(1)}");
+        }
+
+        public static void FluentValidation()
+        {   
+            Toy toy = new() { GiftedOn = new DateTime(2021,12,1), Name = "ToyShort"};
+
+            var validator = new ToyValidator();
+            ValidationResult result = validator.Validate(toy);
+
+            if (!result.IsValid)
+            {
+                result.Errors.ForEach(x => Console.WriteLine(x.ErrorMessage));
+            }
+        }
+
     }
 }
