@@ -4,6 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="10.3.5"/>
+    <PackageReference Include="FluentValidation" Version="10.3.5" />
+    <PackageReference Include="Moq" Version="4.16.1" />
   </ItemGroup>
 </Project>

@@ -95,6 +95,10 @@ namespace GitGoodScrub
             //CustomFunc is not invariant. What is the 'in' and 'out' for?
             Object a = toString(1);
             Console.WriteLine($"Custom func number to print: {toString(1)}");
+
+            string numberString = FuncParamMethods.IntToString(toString, 42);
+
+            Console.WriteLine(numberString);
         }
 
         public static void FluentValidation()

@@ -12,6 +12,7 @@ namespace GitGoodScrub
             RuleFor(x => x.GiftedOn).Must(x => x.DayOfWeek != DayOfWeek.Friday)
                 .WithMessage("You cannot give toys on a friday");
             RuleFor(x => x.GiftedOn).NotOnFriday();
+            RuleFor(x => x.GiftedOn).IsDuringSummerVacation();
         }
     }
 }
