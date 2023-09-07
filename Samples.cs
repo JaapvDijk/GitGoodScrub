@@ -113,6 +113,27 @@ namespace GitGoodScrub
                 result.Errors.ForEach(x => Console.WriteLine(x.ErrorMessage));
             }
         }
+        public static void Adapter()
+        {   
+            new Adapter(new Adaptee()).PrintNumber(42);
+        }
+                    
+        public static void Factory()
+        {   
+            new CasualGreetFactory();
+            new BirthDayGreetFactory();
+        }
 
+        public static void Builder()
+        {   
+            new PersonBuilder().WithFirstName("Henk")
+                               .WithLastName("van de Piet")
+                               .Build();
+        }
+
+        public static void Singletons()
+        {   
+            Console.WriteLine(Singleton.Instance);
+        }
     }
 }
