@@ -1,15 +1,13 @@
 using System;
 
 //Bridges between two incompatble interface
-//Example: reusing legacy code
+//Example: calling legacy code
 
-//The new interface
-public interface ITarget
+public interface IDoTheNewThing
 {
     void PrintNumber(int number);
 }
 
-//The old interface
 public class Adaptee
 {
     public void OutdatedNumberPrinter(string number)
@@ -19,7 +17,7 @@ public class Adaptee
 }
 
 //The bridge
-public class Adapter : ITarget
+public class Adapter : IDoTheNewThing
 {
     private readonly Adaptee _adaptee;
 
